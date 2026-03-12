@@ -20,8 +20,11 @@
         <?php foreach ($posts as $post): ?>
         <div class="post">
             <h2><?php echo htmlspecialchars($post['title']); ?></h2>
-            <div class="post-content"><?php echo nl2br(htmlspecialchars($post['content'])); ?></div>
+            <div class="post-content"><?php echo nl2br(htmlspecialchars(substr($post['content'], 0, 200))); ?><?php echo strlen($post['content']) > 200 ? '...' : ''; ?></div>
             <div class="post-date">Ngày đăng: <?php echo $post['created_at']; ?></div>
+            <div class="post-actions">
+                <a href="index.php?action=detail&id=<?php echo $post['id']; ?>" class="btn btn-view">Xem chi tiết</a>
+            </div>
         </div>
         <?php endforeach; ?>
         <?php endif; ?>

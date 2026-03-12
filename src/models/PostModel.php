@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../../config/db_module.php';
+require_once __DIR__ . '/Post.php';
 
-class PostModel {
+class PostModel extends Post {
     
     public function getAllPosts() {
         $link = null;
@@ -30,6 +31,22 @@ class PostModel {
         
         giaiPhongBoNho($link, null);
         return $result;
+    }
+
+    public function getPostById($id) {
+        $link = null;
+        taoKetNoi($link);
+        
+        $sql = "SELECT * FROM posts WHERE id = $id";
+        $result = chayTruyVanTraVeDL($link, $sql);
+        
+        $post = null;
+        if ($result && mysqli_num_rows($result) > 0) {
+            $post = mysqli_fetch_assoc($result);
+        }
+        
+        giaiPhongBoNho($link, $result);
+        return $post;
     }
 }
 ?>

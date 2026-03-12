@@ -13,6 +13,27 @@ class PostController {
         require_once __DIR__ . '/../views/Home/index.php';
     }
 
+    public function home() {
+        // Alias cho index - hiển thị tất cả bài viết
+        $this->index();
+    }
+
+    public function detail() {
+        if (isset($_GET['id'])) {
+            $id = (int)$_GET['id'];
+            $post = $this->postModel->getPostById($id);
+            
+            if ($post) {
+                require_once __DIR__ . '/../views/Post/DetailPost.php';
+            } else {
+                echo "Bài viết không tồn tại!";
+            }
+        } else {
+            header('Location: index.php');
+            exit;
+        }
+    }
+
     public function create() {
         require_once __DIR__ . '/../views/Post/CreatePost.php';
     }

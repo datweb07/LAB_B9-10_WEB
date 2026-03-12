@@ -17,6 +17,12 @@ switch ($action) {
     case 'index':
         $controller->index();
         break;
+    case 'home':
+        $controller->home();
+        break;
+    case 'detail':
+        $controller->detail();
+        break;
     case 'create':
         $controller->create();
         break;
